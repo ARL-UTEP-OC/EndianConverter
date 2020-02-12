@@ -13,13 +13,11 @@ import logging
 import json
 import os
 
-class MainApp(QMainWindow):
+class MainApp(QWidget):
     def __init__(self, parent=None):
         logging.debug("MainApp:init() instantiated")
-        super(MainApp, self).__init__(parent)
+        super().__init__()
 
-        self.statusBar = self.statusBar()
-        
         self.setFixedSize(350,110)
         quit = QAction("Quit", self)
 
@@ -32,8 +30,6 @@ class MainApp(QMainWindow):
 
         #Create the bottom layout
         self.bottomLayout = QHBoxLayout()
-        #self.statusBar.showMessage("Enter a sequence of hex to convert")
-        self.bottomLayout.addWidget(self.statusBar)
         self.submitButton = QtWidgets.QPushButton("Convert")
         self.submitButton.clicked.connect(self.convertHexDataActionEvent)
         #self.submitButton.setEnabled(False)
@@ -43,9 +39,7 @@ class MainApp(QMainWindow):
         self.mainLayout.addWidget(self.formGroupBox)
         self.mainLayout.addLayout(self.bottomLayout)
 
-        self.outerBox = QWidget()
-        self.outerBox.setLayout(self.mainLayout)
-        self.setCentralWidget(self.outerBox)
+        self.setLayout(self.mainLayout)
 
     def convertHexDataActionEvent(self):
         logging.debug("MainApp:convertHexDataActionEvent() instantiated")
